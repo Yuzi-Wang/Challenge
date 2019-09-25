@@ -8,6 +8,6 @@ BOM_data_separate <-
 BOM_data_separate
 
 BOM_data_separate %>% 
-  filter(Temp_min == min(Temp_min), Temp_max == max(Temp_max)) %>%
+  filter() %>%
   group_by(Station_number) %>% 
   summarise(num_rows = n())
