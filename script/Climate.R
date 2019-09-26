@@ -10,7 +10,7 @@ BOM_data_separate
 
 View(BOM_data_separate)
 BOM_data_separate %>% 
-  filter(Temp_min >= 0 | Temp_max >= 0 | Rainfall >= 0) %>% 
+  filter(Temp_min >= 0, Temp_max >= 0, Rainfall >= 0) %>% 
   group_by(Station_number) %>% 
   summarise(num_rows = n())
 
@@ -42,4 +42,4 @@ Data_with_Temp_diff %>%
 BOM_stations
 view(BOM_stations)
 
-gather()
+gather(-info)
