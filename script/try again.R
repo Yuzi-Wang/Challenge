@@ -111,7 +111,11 @@ Q2 <- ggplot(data = BOM_join_perth,
                      y = Temp_min,
                      size = Rainfall,
                      color = Solar_exposure)) +
-  geom_point()
+  geom_point() +
+  theme(legend.position = c(0.9, 0.3),
+      legend.text = element_text(size = 5),
+      legend.title = element_text(size = 7),
+      legend.key.size = unit(0.15, "cm"))
 
 # Question 3
 
@@ -119,7 +123,7 @@ install.packages("cowplot")
 
 library(cowplot)
 
-Q3 <- plot_grid(Q1_plot01, Q1_plot02, Q1_plot03, Q2) # how to change the size of the legend
+Q3 <- plot_grid(Q1_plot01, Q1_plot02, Q1_plot03, Q2) 
 
 ggsave("figures/question_3.png", plot = Q3, width = 10, height = 15)
 
