@@ -82,4 +82,63 @@ write_csv(BOM_join, "result/BOM-join.csv")
 
 ## 09/10/2019
 
-filter(BOM_join, Station_number == 9225)
+# Question 1
+
+BOM_join_perth <- filter(BOM_join, Station_number == 9225)
+
+Q1_plot01 <- ggplot(data = BOM_join_perth, 
+       mapping = aes(x = Temp_max,
+                     y = Temp_min,
+                     )) +
+  geom_point()
+  
+Q1_plot02 <- ggplot(data = BOM_join_perth, 
+                 mapping = aes(x = Temp_max,
+                               y = Rainfall,
+                 )) +
+  geom_point()
+
+Q1_plot03 <- ggplot(data = BOM_join_perth, 
+                    mapping = aes(x = Temp_max,
+                                  y = Solar_exposure,
+                    )) +
+  geom_point()
+
+# Question 2
+
+Q2 <- ggplot(data = BOM_join_perth,
+       mapping = aes(x = Temp_max,
+                     y = Temp_min,
+                     size = Rainfall,
+                     color = Solar_exposure)) +
+  geom_point()
+
+# Question 3
+
+install.packages("cowplot")
+
+library(cowplot)
+
+Q4 <- plot_grid(Q1_plot01, Q1_plot02, Q1_plot03, Q2) # how to change the size of the legend
+
+ggsave("figures/question_3.png", plot = Q4, width = 10, height = 15)
+
+# Question 4
+
+BOM_data_rainfall <- BOM_data %>% 
+  filter(Rainfall != "-") %>% 
+  mutate(Rainfall = as.numeric(Rainfall)) 
+
+BOM_aver_rainfall <- BOM_data_rainfall %>%
+  group_by(Month, Station_number) %>% 
+  summarise(aver_rainfall = mean(Rainfall))
+
+BOM_join_new <- left_join(BOM_aver_rainfall, BOM_station_num)
+
+ggplot(data = BOM_join_new, 
+       mapping = aes(x = Month,
+                     y = aver_rainfall,
+                     group = Station_number,
+                     color = Station_number)) +
+  geom_line() +
+  facet_wrap(~state)
