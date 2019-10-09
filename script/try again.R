@@ -90,7 +90,7 @@ Q1_plot01 <- ggplot(data = BOM_join_perth,
        mapping = aes(x = Temp_max,
                      y = Temp_min,
                      )) +
-  geom_point()
+  geom_point() 
   
 Q1_plot02 <- ggplot(data = BOM_join_perth, 
                  mapping = aes(x = Temp_max,
@@ -112,10 +112,13 @@ Q2 <- ggplot(data = BOM_join_perth,
                      size = Rainfall,
                      color = Solar_exposure)) +
   geom_point() +
-  theme(legend.position = c(0.9, 0.3),
+  theme(legend.position = c(0.92, 0.25),
       legend.text = element_text(size = 5),
       legend.title = element_text(size = 7),
-      legend.key.size = unit(0.15, "cm"))
+      legend.key.size = unit(0.15, "cm"),
+      legend.background = element_blank(),
+      legend.spacing.y = unit(0.1, "cm"),
+      legend.margin = unit(0.1, "cm"))
 
 # Question 3
 
@@ -126,6 +129,7 @@ library(cowplot)
 Q3 <- plot_grid(Q1_plot01, Q1_plot02, Q1_plot03, Q2) 
 
 ggsave("figures/question_3.png", plot = Q3, width = 10, height = 15)
+
 
 # Question 4
 
