@@ -119,9 +119,9 @@ install.packages("cowplot")
 
 library(cowplot)
 
-Q4 <- plot_grid(Q1_plot01, Q1_plot02, Q1_plot03, Q2) # how to change the size of the legend
+Q3 <- plot_grid(Q1_plot01, Q1_plot02, Q1_plot03, Q2) # how to change the size of the legend
 
-ggsave("figures/question_3.png", plot = Q4, width = 10, height = 15)
+ggsave("figures/question_3.png", plot = Q3, width = 10, height = 15)
 
 # Question 4
 
@@ -135,10 +135,12 @@ BOM_aver_rainfall <- BOM_data_rainfall %>%
 
 BOM_join_new <- left_join(BOM_aver_rainfall, BOM_station_num)
 
-ggplot(data = BOM_join_new, 
+Q4 <- ggplot(data = BOM_join_new, 
        mapping = aes(x = Month,
                      y = aver_rainfall,
                      group = Station_number,
                      color = Station_number)) +
   geom_line() +
   facet_wrap(~state)
+
+ggsave("figures/question_4.png", plot = Q4)
